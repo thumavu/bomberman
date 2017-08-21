@@ -19,14 +19,19 @@
 class Graphics
 {
 public:
-	Graphics(GLuint vertexBuffer, GLuint VAOs[]);
+	Graphics(GLuint VBO, GLuint VAOs[]);
 
 	void initGlArrays(GLuint VBOs[], GLuint VAOs[], GLuint EBOs[]);
+	void initPlayerVertices(G)
 	void drawElements();
 
+	void setInt(int i);
+	int getInt();
+
 private:
-	GLuint vertexBuffer;
+	GLuint VertexArrayID;
 	GLuint VAOs[96];
+	int testIn;
 };
 
 #endif

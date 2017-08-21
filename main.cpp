@@ -21,29 +21,6 @@ int main(void)
 
 	myWindow.runGame();
 	window = myWindow.getWindow();
-	// Initialise GLFW
-	/*if (!glfwInit())
-	{
-		fprintf(stderr, "Failed to initialize GLFW\n");
-		getchar();
-		return -1;
-	}
-
-	glfwWindowHint(GLFW_SAMPLES, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	// Open a window and create its OpenGL context
-	window = glfwCreateWindow(800, 600, "Bomberman", NULL, NULL);
-	if (window == NULL) {
-		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
-		getchar();
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(window);*/
 
 	// Initialize GLEW
 	glewExperimental = true; // Needed for core profile
@@ -61,14 +38,8 @@ int main(void)
 	// Dark blue background
 	//glClearColor(0.0f, 0.3f, 0.0f, 0.0f);
 
-	GLuint VertexArrayID;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-
 	// Create and compile our GLSL program from the shaders
-	GLuint programID = LoadShaders("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader");
-
-	Texture texture("crate3.jpeg");
+	GLuint programID = LoadShaders("SimpleVertexShader.vertexshader", "TextureFragmentShader.hlsl");
 
 	static const GLfloat g_vertex_buffer_data[] = {
 		//vertex data			//texture coordinates 
@@ -101,61 +72,56 @@ int main(void)
 
 	};
 
-	GLuint vertexbuffer;
+	GLuint VertexArrayID, vertexbuffer, elementBuffer, wallTexture;
+
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
 	glGenBuffers(1, &vertexbuffer);
+	glGenBuffers(1, &elementBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-	GLuint vertexbuffer1;
-	glGenBuffers(1, &vertexbuffer1);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexbuffer1);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
+	glVertexAttribPointer(
+		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		5 * sizeof(GL_FLOAT),                  // stride
+		(void*)0            // array buffer offset
+	);
+	glEnableVertexAttribArray(0);
+	// texture coord attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	Texture texture("next.JPEG", &wallTexture);
 
 	//trin declare and init
 	GLuint VAOs[96], VBOs[96];//, EBOs[97];
 	unsigned int EBOs[96];
-	Graphics g(vertexbuffer, VAOs);
+	Graphics g(VertexArrayID, VAOs);
+	g.setInt(10);
 
 	g.initGlArrays(VBOs, VAOs, EBOs);
 	myWindow.setGraphics(g);
 
 	do {
-
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Use our shader
 		glUseProgram(programID);
-
 		//bind texture
-		texture.Bind(0);
+    	glBindTexture(GL_TEXTURE_2D, wallTexture);
+    	g.drawElements();
 
-		// 1rst attribute buffer : vertices
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			5 * sizeof(GL_FLOAT),                  // stride
-			(void*)0            // array buffer offset
-		);
-
-
-
-		// Draw the triangle !
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0); // 3 indices starting at 0 -> 1 triangle
-
-															  //trin logic
-		for (int i = 0; i < 96; i++) {
+		//trin logic
+		for (int i = 0; i < 96; i++)
+		{
 			glBindVertexArray(VAOs[i]);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // 3 indices starting at 0 -> 1 triangle
 		}
-		//g.drawElements();
-
-		glDisableVertexAttribArray(0);
 
 		// Swap buffers
 		glfwSwapBuffers(window);

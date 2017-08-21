@@ -29,7 +29,8 @@ void MainMenu::executeCommand(int input){
     Input command;
     switch(input){
         case command.Start :
-            std::cout << "Start" << std::endl;
+            std::cout << "Start:" << graphics->getInt() << std::endl;
+            glClear(GL_COLOR_BUFFER_BIT);
 			graphics->drawElements();
         break;
         case command.Continue :

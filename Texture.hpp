@@ -8,13 +8,12 @@
 
 class Texture 
 {
-
     private:
         GLuint _mtexture;
         Texture(const Texture& other) {}
         void operator=(const Texture& other) {}
     public:
-        Texture(const std::string& filename);
+        Texture(const std::string& filename, GLuint *texture);
         ~Texture(void);
         void Bind(unsigned int unit);
 };
