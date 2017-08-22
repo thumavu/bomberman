@@ -1,4 +1,4 @@
-#include "Sound.class.hpp"
+#include "Sound.hpp"
 
 void Sound::loadEffects(void)
 {

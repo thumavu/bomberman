@@ -1,6 +1,5 @@
-#include "Sound.class.hpp"
-#include "Bomberman.class.hpp"
-#include "WindowKeyEvents.class.hpp"
+#include "Sound.hpp"
+#include "WindowKeyEvents.hpp"
 
 WindowKeyEvents::WindowKeyEvents(){
 }
