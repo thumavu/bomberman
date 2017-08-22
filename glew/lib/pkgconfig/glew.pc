@@ -1,6 +1,6 @@
-prefix=/nfs/zfs-student-6/users/tditshwe/.brew/Cellar/glew/2.1.0
+prefix=/goinfre/emsimang/.brew/Cellar/glew/2.1.0
 exec_prefix=${prefix}
-libdir=/nfs/zfs-student-6/users/tditshwe/.brew/Cellar/glew/2.1.0/lib
+libdir=/goinfre/emsimang/.brew/Cellar/glew/2.1.0/lib
 includedir=${prefix}/include
 
 Name: glew
