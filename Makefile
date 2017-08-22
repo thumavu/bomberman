@@ -46,14 +46,21 @@ _SDL2_MIXER_FOLDER = $(BREW)/Cellar/sdl2_mixer
 SDL2_MIXER_FOLDER = $(_SDL2_MIXER_FOLDER)/$(shell ls -r $(_SDL2_MIXER_FOLDER) | head -n 1)
 SDL2_MIXER = -L $(SDL2_MIXER_FOLDER)/lib -lSDL2_mixer -I $(SDL2_MIXER_FOLDER)/include/SDL2
 
+_GLM_FOLDER = $(BREW)/Cellar/glm
+GLM_FOLDER = $(_GLM_FOLDER)/$(shell ls -r $(_GLM_FOLDER) | head -n 1)
+GLM = -I $(GLM_FOLDER)/include/GLM
+
 all: $(NAME)
 
-$(NAME): $(SRC) $(INCLUDE) $(BREW) $(_GLEW_FOLDER) $(_GLFW_FOLDER) $(_SDL2_FOLDER) $(_SDL2_MIXER_FOLDER)
-	$(CC) $(CCFLAGS) -o $(NAME) $(SRC) -I $(INCLUDE_FOLDER) $(GLEW) $(GLFW) $(SDL2) $(SDL2_MIXER) -framework OpenGL
+$(NAME): $(SRC) $(INCLUDE) $(BREW) $(_GLM_FOLDER) $(_GLEW_FOLDER) $(_GLFW_FOLDER) $(_SDL2_FOLDER) $(_SDL2_MIXER_FOLDER)
+	$(CC) $(CCFLAGS) -o $(NAME) $(SRC) -I $(INCLUDE_FOLDER) $(GLM) $(GLEW) $(GLFW) $(SDL2) $(SDL2_MIXER) -framework OpenGL
 
 $(BREW):
 	git clone $(BREW_REPO) $(BREW_TMP)
 	sh $(BREW_TMP)/install.sh && rm -rf $(BREW_TMP)
+
+$(_GLM_FOLDER):
+	brew install glm
 
 $(_GLEW_FOLDER):
 	brew install glew
