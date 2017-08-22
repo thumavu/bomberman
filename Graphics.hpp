@@ -13,8 +13,8 @@
 #ifndef _GRAPHICS_HPP
 #define _GRAPHICS_HPP
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "glew.h"
+#include "glfw3.h"
 
 class Graphics
 {
