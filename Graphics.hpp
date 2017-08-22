@@ -6,7 +6,7 @@
 /*   By: tditshwe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/16 14:44:19 by tditshwe          #+#    #+#             */
-/*   Updated: 2017/08/16 14:44:21 by tditshwe         ###   ########.fr       */
+/*   Updated: 2017/08/22 10:44:35 by emsimang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ public:
 	Graphics(GLuint VBO, GLuint VAOs[]);
 
 	void initGlArrays(GLuint VBOs[], GLuint VAOs[], GLuint EBOs[]);
-	void initPlayerVertices(G)
+	
+	/* causing errors, and hence code doesn't compile: emsimang */
+	//void initPlayerVertices(G);
+	
 	void drawElements();
 
 	void setInt(int i);
