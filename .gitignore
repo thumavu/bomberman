@@ -31,5 +31,6 @@
 *.out
 *.app
 
-# Swap files
+# Swap files && DS_Store
 ._*
+.DS*
