@@ -1,8 +1,7 @@
 #ifndef SOUND_CLASS_HPP
 #define SOUND_CLASS_HPP
 
-#include "Sound.class.hpp"
-#include "Bomberman.class.hpp"
+#include "Bomberman.hpp"
 
 #define SOUND_CHANNELS 2
 #define SOUND_CHUNK_SIZE 4096

@@ -1,8 +1,7 @@
 #ifndef WINDOW_KEY_EVENTS_HPP
 #define WINDOW_KEY_EVENTS_HPP
 
-# include "Sound.class.hpp"
-# include "Bomberman.class.hpp"
+# include "Sound.hpp"
 
 class WindowKeyEvents {
     public:
