@@ -17,10 +17,14 @@ GLFWwindow* window;
 
 int main(void)
 {
+	Sound *sound;
 	Window myWindow;
+	WindowKeyEvents *keyEvents;
 
 	myWindow.runGame();
+	sound = myWindow.getSound();
 	window = myWindow.getWindow();
+	keyEvents = myWindow.getEvents();
 
 	// Initialize GLEW
 	glewExperimental = true; // Needed for core profile
@@ -114,7 +118,8 @@ int main(void)
 		glUseProgram(programID);
 		//bind texture
     	glBindTexture(GL_TEXTURE_2D, wallTexture);
-    	g.drawElements();
+		g.drawElements();
+		keyEvents->keyEventsWrapper(window, sound);
 
 		//trin logic
 		for (int i = 0; i < 96; i++)

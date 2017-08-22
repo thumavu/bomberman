@@ -98,7 +98,18 @@ void Window::terminateSystems()
     exit(EXIT_FAILURE);
 }
 
+Sound* Window::getSound()
+{
+    return (_sound);
+}
+
 GLFWwindow* Window::getWindow()
 {
     return _window;
 }
+
+WindowKeyEvents* Window::getEvents()
+{
+    return (_keyEvents);
+}
+

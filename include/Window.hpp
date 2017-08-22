@@ -21,9 +21,10 @@ public:
     void terminateSystems();
     void setGraphics(Graphics g);
 
+    Sound* getSound();
     GLFWwindow* getWindow();
+    WindowKeyEvents* getEvents();
 
-private:
 private:
     int _width;
     int _height;
