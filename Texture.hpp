@@ -1,7 +1,7 @@
 
 #include <string>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "glew.h"
+#include "glfw3.h"
 #include "stb_image.h"
 #include <cassert>
 #include <iostream>
