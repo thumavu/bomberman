@@ -23,7 +23,7 @@ public:
 
 private:
     GLFWwindow* _window;
-    Graphics *graphics;     
+    Graphics *graphics;
 };
 
 #endif
