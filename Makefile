@@ -19,8 +19,11 @@ CCFLAGS = #-Wall -Werror -Wextra
 SRC_FOLDER = src
 INCLUDE_FOLDER = include
 
-SRC = main.cpp Graphics.cpp Window.cpp MainMenu.cpp stb_image.cpp \
-	  Texture.cpp common/shader.cpp src/*
+SRCDIR = src/
+SRCS = main.cpp Graphics.cpp Window.cpp MainMenu.cpp stb_image.cpp \
+	  Texture.cpp common/shader.cpp WindowKeyEvents.cpp \
+	  Sound.cpp
+SRC	= $(addprefix $(SRCDIR), $(SRCS))
 INCLUDE = $(wildcard $(INCLUDE_FOLDER)/*.hpp)
 
 BREW_REPO = https://github.com/Tolsadus/42homebrewfix.git
