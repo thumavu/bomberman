@@ -7,12 +7,13 @@
 #define SOUND_CHUNK_SIZE 4096
 
 /* Channels */
+#define WALK_CHANNEL 1
 #define DEFAULT_CHANNEL -1
 
 /* Effects */
 #define NUM_EFFECTS 2
 #define EFFECT_CHIME 0
-#define EFFECT_WALK 0
+#define EFFECT_WALK 1
 
 /* Music */
 #define NUM_MUSIC 1
@@ -31,7 +32,7 @@ class Sound
         Sound(void);
         ~Sound(void);
 
-        void playEffectOnce(int effect);
+        void playEffectOnce(int effect, int channel);
         void playEffectLoop(int effect, int loop);
         void playEffectForvever(int effect);
 

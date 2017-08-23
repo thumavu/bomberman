@@ -4,7 +4,7 @@ void Sound::loadEffects(void)
 {
     this->effects = new Mix_Chunk*[NUM_EFFECTS];
     (this->effects)[EFFECT_CHIME] = Mix_LoadWAV("sounds/chime.wav");
-    (this->effects)[EFFECT_WALK] = Mix_LoadWAV("sounds/walk.wav");
+    (this->effects)[EFFECT_WALK] = Mix_LoadWAV("sounds/walk_e.wav");
 }
 
 void Sound::loadMusic(void)
@@ -35,10 +35,10 @@ Sound::~Sound(void)
     Mix_CloseAudio();
 }
 
-void Sound::playEffectOnce(int effect)
+void Sound::playEffectOnce(int effect, int channel)
 {
     
-    Mix_PlayChannel(DEFAULT_CHANNEL, (this->effects)[effect], 0);
+    Mix_PlayChannel(channel, (this->effects)[effect], 0);
 }
 
 void Sound::playEffectLoop(int effect, int loop)
